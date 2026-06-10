@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳自駕汕尾 · 三天兩夜家庭攻略</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #FDF8F0;
+    color: #3D2B1F;
+    line-height: 1.7;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 16px 40px; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 320px;
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    background: linear-gradient(135deg, #1a5276 0%, #2980b9 30%, #5dade2 60%, #f9e79f 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px 32px 28px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.55));
+  }
+  .hero-deco {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+  }
+  .hero-deco .sun {
+    position: absolute; top: 40px; right: 60px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFE082, #FFB300);
+    opacity: 0.7;
+  }
+  .hero-deco .wave {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,255,255,0.08) 20px, rgba(255,255,255,0.08) 40px);
+  }
+  .hero-deco .mountain {
+    position: absolute; bottom: 60px; left: 10%;
+    width: 0; height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 100px solid rgba(46,125,50,0.3);
+  }
+  .hero-deco .mountain2 {
+    position: absolute; bottom: 60px; left: 30%;
+    width: 0; height: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 80px solid rgba(46,125,50,0.2);
+  }
+  .hero-content { position: relative; z-index: 1; color: #fff; }
+  .hero-content h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .hero-content .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.92;
+    margin-bottom: 20px;
+  }
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .hero-stat strong { display: block; font-size: 0.75rem; opacity: 0.85; }
+
+  /* Section */
+  .section {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.25rem;
+    color: #8B6914;
+    font-weight: 700;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #F5E6D0;
+  }
+
+  /* Route Overview */
+  .route-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+  }
+  .route-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #D4A84B;
+    border: 2px solid #FDF8F0;
+    flex-shrink: 0;
+  }
+  .route-connector {
+    width: 32px; height: 2px;
+    background: #E8D5B5;
+    flex-shrink: 0;
+  }
+  .route-label { color: #8B6914; font-weight: 600; padding: 0 4px; }
+  .segment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .segment-card {
+    background: #FFFAF3;
+    border-radius: 8px;
+    padding: 14px;
+    border-left: 3px solid #D4A84B;
+  }
+  .segment-card h4 { color: #8B6914; font-size: 0.95rem; margin-bottom: 6px; }
+  .segment-card p { font-size: 0.82rem; color: #666; }
+  .segment-card .duration {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    background: #F5E6D0;
+    color: #8B6914;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  /* Day Card */
+  .day-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .day-header {
+    background: linear-gradient(135deg, #F5E6D0, #F0DCC0);
+    border-left: 4px solid #D4A84B;
+    padding: 16px 24px;
+  }
+  .day-header h3 { color: #8B6914; font-size: 1.1rem; }
+  .day-body {
+    display: flex;
+    padding: 20px 24px;
+    gap: 20px;
+  }
+  .timeline { flex: 7; }
+  .highlights-sidebar {
+    flex: 3;
+    background: #FFFAF3;
+    border-left: 3px solid #D4A84B;
+    border-radius: 8px;
+    padding: 16px;
+    align-self: flex-start;
+  }
+  .highlights-sidebar h4 {
+    color: #8B6914;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  .highlights-sidebar ul { list-style: none; }
+  .highlights-sidebar li {
+    font-size: 0.82rem;
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .highlights-sidebar li::before {
+    content: '';
+    position: absolute; left: 0; top: 11px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #D4A84B;
+  }
+  .tips-block { margin-top: 14px; }
+  .tips-block h4 { color: #C62828; font-size: 0.85rem; margin-bottom: 8px; }
+
+  /* Timeline */
+  .timeline-item {
+    position: relative;
+    padding-left: 28px;
+    padding-bottom: 22px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: 0; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #D4A84B;
+    border: 2px solid #FDF8F0;
+    z-index: 1;
+  }
+  .timeline-item::after {
+    content: '';
+    position: absolute; left: 4px; top: 16px;
+    width: 2px;
+    height: calc(100% - 6px);
+    background: #E8D5B5;
+  }
+  .timeline-item:last-child::after { display: none; }
+  .time-label {
+    font-size: 0.8rem;
+    color: #8B6914;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .spot-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #3D2B1F;
+    margin-bottom: 4px;
+  }
+  .spot-desc { font-size: 0.82rem; color: #666; }
+  .tags { margin: 6px 0; }
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-right: 4px;
+  }
+  .tag-recommend { background: #E8F5E9; color: #2E7D32; }
+  .tag-free { background: #E3F2FD; color: #1565C0; }
+  .tag-booking { background: #FFF3E0; color: #E65100; }
+  .tag-photo { background: #FCE4EC; color: #C62828; }
+  .tag-family { background: #F3E5F5; color: #6A1B9A; }
+  .ticket-tag {
+    font-size: 0.75rem;
+    color: #8B6914;
+    background: #F5E6D0;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+
+  /* Three columns */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .col-card {
+    background: #FFFAF3;
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .col-card h4 {
+    color: #8B6914;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #F5E6D0;
+  }
+  .col-card ul { list-style: none; }
+  .col-card li {
+    font-size: 0.8rem;
+    padding: 3px 0;
+    color: #555;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  th {
+    background: #F5E6D0;
+    color: #8B6914;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #F0E6D6;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* Budget */
+  .budget-totals { margin-top: 16px; }
+  .budget-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .budget-economy { background: #E8F5E9; color: #2E7D32; }
+  .budget-comfort { background: #FFF3E0; color: #E65100; }
+  .budget-luxury { background: #FCE4EC; color: #C62828; }
+  .saving-tips {
+    background: #FFFAF3;
+    border-left: 3px solid #D4A84B;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .saving-tips h4 { color: #8B6914; font-size: 0.88rem; margin-bottom: 8px; }
+  .saving-tips li { font-size: 0.82rem; color: #555; margin-left: 16px; }
+  .disclaimer {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* Checklist */
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .checklist-box {
+    background: #FFFAF3;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .checklist-box h4 { color: #8B6914; font-size: 0.9rem; margin-bottom: 10px; }
+  .checklist-box li { font-size: 0.82rem; color: #555; margin-left: 16px; margin-bottom: 4px; }
+
+  /* Source note */
+  .source-note {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .day-body { flex-direction: column; }
+    .highlights-sidebar { border-left: none; border-top: 3px solid #D4A84B; }
+    .three-col { grid-template-columns: 1fr; }
+    .segment-grid { grid-template-columns: 1fr; }
+    .checklist-grid { grid-template-columns: 1fr; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; }
+    .hero-content h1 { font-size: 1.4rem; }
+  }
+
+  @media print {
+    body { background: white; }
+    .day-card { break-inside: avoid; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-deco">
+    <div class="sun"></div>
+    <div class="mountain"></div>
+    <div class="mountain2"></div>
+    <div class="wave"></div>
+  </div>
+  <div class="hero-content">
+    <h1>深圳自駕汕尾 · 三天兩夜家庭攻略</h1>
+    <p class="subtitle">7公里原生沙灘 · 6月荔枝採摘 · 紅海灣玻璃海 · 三代同堂輕鬆遊</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>出行日期</strong>6月中旬（荔枝季）</div>
+      <div class="hero-stat"><strong>總里程</strong>約 350 km</div>
+      <div class="hero-stat"><strong>主題段數</strong>4 段</div>
+      <div class="hero-stat"><strong>重點提醒</strong>長輩防曬 · 風車島看潮汐</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 路線總覽 -->
+  <div class="section">
+    <h2 class="section-title">路線總覽</h2>
+    <div class="route-line">
+      <span class="route-label">深圳</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">金町灣</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">寶樓村採荔</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">紅海灣</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">深圳</span>
+    </div>
+    <div class="segment-grid">
+      <div class="segment-card">
+        <h4>第一段 · 金町灣海濱</h4>
+        <p>7公里無污染沙灘，配套成熟，適合老人小孩戲水踏浪，別墅區步行即達</p>
+        <span class="duration">Day 1 下午 + 晚</span>
+      </div>
+      <div class="segment-card">
+        <h4>第二段 · 荔香田園</h4>
+        <p>6月妃子笑、鳳山紅燈籠正當季，300畝果園親手採摘，長輩小孩都愛</p>
+        <span class="duration">Day 2 上午</span>
+      </div>
+      <div class="segment-card">
+        <h4>第三段 · 紅海灣海岸</h4>
+        <p>海上古堡、南海觀音、後澳玻璃海，廣東十大最美海島之一</p>
+        <span class="duration">Day 2 下午</span>
+      </div>
+      <div class="segment-card">
+        <h4>第四段 · 輕鬆返程</h4>
+        <p>品清湖或農首生態園輕鬆半日，午後返深，避開週日傍晚高速高峰</p>
+        <span class="duration">Day 3 上午</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 1 · 6月X日（週五）· 主題：啟程金町灣，海邊安營扎寨</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">08:00 – 11:00</div>
+          <div class="spot-name">深圳出發 → 汕尾金町灣<span class="ticket-tag">約 169 km · 2.5h</span></div>
+          <div class="tags">
+            <span class="tag tag-family">三代同堂</span>
+            <span class="tag tag-booking">建議2台車</span>
+          </div>
+          <p class="spot-desc">經南坪快速 → 水官高速 → 沈海高速（G15深汕段），從「汕尾/海豐」出口下高速。深汕段已擴建為雙向8車道，設計時速120 km/h，深汕互通約90分鐘。途中可在<strong>長沙灣服務區</strong>（藍鯨造型地標）休息如廁，這是進入粵東的第一站，有漁家民俗展示和海鲜集市。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">11:30 – 12:30</div>
+          <div class="spot-name">辦理入住 · 金町灣別墅區</div>
+          <div class="tags">
+            <span class="tag tag-recommend">推薦</span>
+            <span class="tag tag-family">7人+必選</span>
+          </div>
+          <p class="spot-desc">推薦預訂<strong>5-7房海景別墅</strong>（如聆海5房7床、童趣親子滑梯別墅），配私人泳池、KTV、麻將、廚房和庭院燒烤。7人以上建議整棟包下，長輩有獨立房間休息，小孩可在院內玩水。步行2-3分鐘即達7公里原生沙灘。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">14:00 – 17:30</div>
+          <div class="spot-name">保利金町灣沙灘<span class="ticket-tag">免費</span></div>
+          <div class="tags">
+            <span class="tag tag-free">免費</span>
+            <span class="tag tag-family">親子戲水</span>
+            <span class="tag tag-photo">拍照圣地</span>
+          </div>
+          <p class="spot-desc">被譽為「海上香格里拉」，沙灘細軟平緩，坡度小，非常適合帶小孩和老人戲水。可帶挖沙工具、浮板，長輩可在沙灘椅休息。園區有摩天輪、小火車等親子項目（另付費）。注意：海邊紫外線極強，務必全員塗防曬。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">18:30 – 21:30</div>
+          <div class="spot-name">二馬路美食街</div>
+          <div class="tags">
+            <span class="tag tag-recommend">必吃</span>
+          </div>
+          <p class="spot-desc">從金町灣打車約20分鐘（或自駕，但<strong>停車困難，建議打車</strong>）。汕尾美食的靈魂所在，下午4點後開始熱鬧，晚上9點半後最煙火。必吃：源記菜粿（162號，12元拼盤）、汕中路口薄餅（368號，咸甜各12元）、德明菜粿（362號，35年老店）、杯杯鮮果汁（約10元/杯）。長輩可試菜茶（骨湯沖炒米蔬菜，軟爛好消化）。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>長沙灣藍鯨服務區打卡休息</li>
+          <li>別墅泳池 + 7公里沙灘雙重玩水</li>
+          <li>二馬路掃街，一次吃遍汕尾小吃</li>
+          <li>別墅庭院海鮮BBQ（可自備食材）</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>別墅入住需一人一證登記</li>
+            <li>泳池開放時間5-10月</li>
+            <li>二馬路人車混雜，注意長輩安全</li>
+            <li>KTV 22:30後調低音量</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 2 · 6月X日（週六）· 主題：採荔品甜，紅海灣追海</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">08:30 – 11:30</div>
+          <div class="spot-name">碧泉農業 · 寶樓村荔枝採摘<span class="ticket-tag">約 ¥30-50/人</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">6月必玩</span>
+            <span class="tag tag-family">全齡適合</span>
+            <span class="tag tag-booking">建議電話預約</span>
+          </div>
+          <p class="spot-desc">汕尾市官方推薦的「金町灣畔·荔香古堡之旅」核心站點。位於城區東涌鎮寶樓村，300畝「粵字號」示範基地，6月中旬起可採<strong>妃子笑、鳳山紅燈籠</strong>，6月下旬還有桂味、仙進奉。長輩可在樹下休息，小孩體驗親手摘果的樂趣，現摘現吃最新鮮。採摘後可購買帶走或順豐寄件。</p>
+          <p class="source-note">資訊來源：汕尾市人民政府「荔香飄溢 相約汕尾」官方採摘線路（2025-06）</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">12:00 – 13:30</div>
+          <div class="spot-name">農首生態園（可選）<span class="ticket-tag">距寶樓村約20 min</span></div>
+          <div class="tags">
+            <span class="tag tag-free">輕鬆</span>
+            <span class="tag tag-family">長輩友好</span>
+          </div>
+          <p class="spot-desc">若採荔後還有體力，可順路前往捷勝鎮軍船頭村「中國美麗休閒鄉村」。園區有四季花卉、生態養殖和農產品展示，平坦好走，適合老人散步。也可在此用簡餐後再出發紅海灣。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">14:30 – 17:00</div>
+          <div class="spot-name">紅海灣 · 海上古堡 + 後澳玻璃海<span class="ticket-tag">門票 ¥16/人</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">拍照圣地</span>
+            <span class="tag tag-recommend">推薦</span>
+          </div>
+          <p class="spot-desc">導航「紅海灣旅遊區」，停車約10元/天。先看<strong>海上古堡</strong>（原潮汐發電站遺址，現為網紅咖啡廳，復古工業風），長輩可在店內吹冷氣休息喝咖啡。再前往<strong>後澳玻璃海</strong>，海水清澈見底，沙灘可撿貝殼。70歲以上長輩及1.2米以下兒童免票，60-69歲長輩半價8元。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">17:00 – 18:30</div>
+          <div class="spot-name">南海觀音景區<span class="ticket-tag">08:00-18:30</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">拍照</span>
+            <span class="tag tag-family">祈福</span>
+          </div>
+          <p class="spot-desc">懸崖上的10米高觀音像，廣場平坦開闊，長輩可在此祈福、俯瞰海景。下午4-6點光線最佳，浪花鍍金邊效果絕美。注意礁石區穿防滑鞋，漲潮前1小時撤離。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">19:00 – 21:00</div>
+          <div class="spot-name">海鮮晚餐 · 紅海灣或大湖</div>
+          <div class="tags">
+            <span class="tag tag-booking">問清價格</span>
+          </div>
+          <p class="spot-desc">建議到<strong>奎山市場</strong>自選海鮮，再到明碼標價的店加工（加工費約10-20元/斤）。避坑：紅海灣大排檔慎點「時價菜」，先問清楚再下單。推薦椒鹽瀨尿蝦、白灼海蝦、清蒸石斑，長輩適合清淡做法。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>6月限定：親手採荔枝</li>
+          <li>海上古堡網紅大片</li>
+          <li>後澳玻璃海撿貝殼</li>
+          <li>南海觀音懸崖祈福</li>
+          <li>現撈海鮮大餐</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>採荔前電話確認熟度</li>
+            <li>風車島連島路漲潮易淹，帶老人建議跳過</li>
+            <li>共享電驢勿騎出市區範圍</li>
+            <li>海鮮加工前先問總價</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 3 · 6月X日（週日）· 主題：湖光山色，滿載而歸</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">08:30 – 10:30</div>
+          <div class="spot-name">品清湖環湖 / 鳳山媽祖<span class="ticket-tag">媽祖園 ¥15/人</span></div>
+          <div class="tags">
+            <span class="tag tag-free">輕鬆</span>
+            <span class="tag tag-family">長輩友好</span>
+          </div>
+          <p class="spot-desc">兩個方案二選一：<strong>方案A</strong>品清湖環湖棧道，平坦好走，可遠眺小島漁村；<strong>方案B</strong>鳳山媽祖旅遊區（粵東最大媽祖像），有纜車可登頂俯瞰汕尾全景，長輩可坐纜車上下，免爬坡。帶小孩可去媽祖園區的媽祖文化展示。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">10:30 – 12:00</div>
+          <div class="spot-name">多彩荔園（備選採摘）<span class="ticket-tag">距市區約40 min</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">6月20日起</span>
+          </div>
+          <p class="spot-desc">若Day 2採荔意猶未盡，或行程安排在6月下旬，可順路去海豐縣可塘鎮上達村「多彩荔園」（250畝，20+品種，以<strong>觀音綠</strong>聞名，6月20日起開摘）。若時間緊，此站可跳過直接返深。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">12:00 – 13:00</div>
+          <div class="spot-name">午餐 + 購買伴手禮</div>
+          <p class="spot-desc">市區用午餐，購買伴手禮：擂茶粉、馬宮魚丸、汕尾擂茶、自曬蝦乾。可在二馬路附近打包薄餅、菜粿帶回深圳。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">13:30 – 16:30</div>
+          <div class="spot-name">返程深圳<span class="ticket-tag">約 169 km · 2.5-3h</span></div>
+          <p class="spot-desc">週日下午高速車流較大，建議13:30前出發。沈海高速過路費單程約75-85元/車（2025年調價後），2台車約170元。抵達深圳約16:30，避開晚高峰。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>品清湖或媽祖文化二選一</li>
+          <li>觀音綠荔枝補採（可選）</li>
+          <li>掃貨伴手禮返深</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>別墅12:00前退房，可寄放行李</li>
+            <li>週日13:30前出發避堵</li>
+            <li>生鮮荔枝易壞，長途用泡沫箱+冰袋</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 预约与行前准备 -->
+  <div class="section">
+    <h2 class="section-title">預約與行前準備</h2>
+    <div class="three-col">
+      <div class="col-card">
+        <h4>預約購票</h4>
+        <table>
+          <tr><th>景點</th><th>預約</th><th>參考價</th></tr>
+          <tr><td>金町灣沙灘</td><td>無需</td><td>免費</td></tr>
+          <tr><td>紅海灣旅遊區</td><td>現場購</td><td>¥16/人</td></tr>
+          <tr><td>南海觀音景區</td><td>現場購</td><td>含在紅海灣</td></tr>
+          <tr><td>鳳山媽祖</td><td>現場購</td><td>¥15/人</td></tr>
+          <tr><td>碧泉農業採荔</td><td>電話預約</td><td>¥30-50/人</td></tr>
+          <tr><td>多彩荔園</td><td>電話預約</td><td>¥30-50/人</td></tr>
+          <tr><td>金町灣別墅</td><td>提前2週訂</td><td>¥1500-3500/晚</td></tr>
+        </table>
+      </div>
+      <div class="col-card">
+        <h4>交通前往</h4>
+        <ul>
+          <li><strong>深圳→汕尾</strong>：沈海高速G15，169 km，2.5-3h</li>
+          <li><strong>過路費</strong>：單程約75-85元/車（2025調價後）</li>
+          <li><strong>油費</strong>：單程約100元/車</li>
+          <li><strong>7人建議</strong>：2台7座車，或1台商務+1台小車</li>
+          <li><strong>金町灣→寶樓村</strong>：約30 min</li>
+          <li><strong>金町灣→紅海灣</strong>：约40 min</li>
+          <li><strong>市區→二馬路</strong>：打車約15 min</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>預約提醒</h4>
+        <ul>
+          <li>6月採荔旺季，出發前1-2天電話確認果熟度</li>
+          <li>別墅節假日緊張，至少提前2週預訂</li>
+          <li>確認別墅泳池是否開放（5-10月正常）</li>
+          <li>紅海灣停車場旺季早到，10元/天</li>
+          <li>下載「潮汐表」App查風車島連島路潮位</li>
+          <li>海鮮加工前確認總價，避免時價陷阱</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 实用建议 -->
+  <div class="section">
+    <h2 class="section-title">實用建議</h2>
+    <div class="three-col">
+      <div class="col-card">
+        <h4>住宿推薦</h4>
+        <ul>
+          <li><strong>首選</strong>：金町灣5-7房別墅整棟（7人+）</li>
+          <li><strong>親子</strong>：童趣滑梯+泡泡池主題別墅</li>
+          <li><strong>品質</strong>：保利希爾頓逸林酒店（含早餐）</li>
+          <li><strong>價位</strong>：別墅 ¥1500-3500/晚</li>
+          <li><strong>優勢</strong>：廚房+燒烤+泳池+KTV一站式</li>
+          <li><strong>避坑</strong>：慎選「圖片不符」的海景公寓</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>美食推薦</h4>
+        <ul>
+          <li><strong>菜粿</strong>：源記（二馬路162號）</li>
+          <li><strong>薄餅</strong>：汕中路口（368號，咸甜各12元）</li>
+          <li><strong>腸粉</strong>：配「尼仔解」醬料</li>
+          <li><strong>菜茶</strong>：骨湯沖炒米，長輩最愛</li>
+          <li><strong>海鮮</strong>：奎山市場自選+加工</li>
+          <li><strong>甜品</strong>：九毛膏、姜薯糖水</li>
+          <li><strong>時令</strong>：6月現摘荔枝、鲜榨果汁</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>家庭出遊貼士</h4>
+        <ul>
+          <li>長輩：行程每段留足休息，避免連續換酒店</li>
+          <li>小孩：帶挖沙工具、浮板、換洗衣物</li>
+          <li>防曬：SPF50+、遮陽帽、冰袖、曬後修復</li>
+          <li>暈車：長輩坐前排，途中多停服務區</li>
+          <li>常備：暈車藥、腸胃藥、創可貼、驅蚊液</li>
+          <li>海邊：指定區域戲水，勿去未開發野灘</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 预算预估 -->
+  <div class="section">
+    <h2 class="section-title">預算預估（8人 / 3天2夜 / 2台車）</h2>
+    <table>
+      <tr>
+        <th>項目</th>
+        <th>單價參考</th>
+        <th>小計（8人）</th>
+        <th>備註</th>
+      </tr>
+      <tr>
+        <td>自駕油費+過路費</td>
+        <td>約 ¥350/車/往返</td>
+        <td>¥700</td>
+        <td>2台車往返</td>
+      </tr>
+      <tr>
+        <td>別墅住宿</td>
+        <td>¥1500-3500/晚</td>
+        <td>¥3000-7000</td>
+        <td>2晚整棟5-7房</td>
+      </tr>
+      <tr>
+        <td>景點門票</td>
+        <td>見明細</td>
+        <td>¥200</td>
+        <td>長輩/兒童多數半價或免票</td>
+      </tr>
+      <tr>
+        <td>採荔體驗</td>
+        <td>¥30-50/人</td>
+        <td>¥320</td>
+        <td>含部分帶走</td>
+      </tr>
+      <tr>
+        <td>餐飲</td>
+        <td>¥120-250/人/天</td>
+        <td>¥2880-6000</td>
+        <td>含1次海鮮大餐</td>
+      </tr>
+      <tr>
+        <td>市內打車/停車</td>
+        <td>—</td>
+        <td>¥300</td>
+        <td>二馬路打車等</td>
+      </tr>
+      <tr>
+        <td>其他</td>
+        <td>預留</td>
+        <td>¥500</td>
+        <td>伴手禮+應急</td>
+      </tr>
+    </table>
+
+    <div class="budget-totals">
+      <div class="budget-row budget-economy">
+        <span>合計（經濟型）</span>
+        <span>≈ ¥7,900（人均約 ¥990）</span>
+      </div>
+      <div class="budget-row budget-comfort">
+        <span>合計（舒適型）</span>
+        <span>≈ ¥13,500（人均约 ¥1,690）</span>
+      </div>
+      <div class="budget-row budget-luxury">
+        <span>合計（品質型）</span>
+        <span>≈ ¥22,000（人均约 ¥2,750）</span>
+      </div>
+    </div>
+
+    <div class="saving-tips">
+      <h4>省錢小貼士</h4>
+      <ul>
+        <li>週五出發週日返，避開週六入住高峰，別墅價格更優</li>
+        <li>海鮮到奎山市場自選，比大排檔省30-50%</li>
+        <li>金町灣別墅自帶廚房，部分餐食自煮更划算</li>
+        <li>6月採荔季，園區價格比市場更實惠</li>
+        <li>紅海灣、金町灣沙灘均免費，門票開支極低</li>
+      </ul>
+    </div>
+    <p class="disclaimer">以上價格為2026年6月參考價，實際以出行時為準。品質型含希爾頓級別住宿及高端海鮮餐。</p>
+  </div>
+
+  <!-- 出发前最后检查 -->
+  <div class="section">
+    <h2 class="section-title">出發前最後檢查</h2>
+    <div class="checklist-grid">
+      <div class="checklist-box">
+        <h4>注意事項</h4>
+        <ul>
+          <li>6月汕尾氣溫28-33°C，海邊紫外線極強</li>
+          <li>風車島連島路漲潮時會淹，帶老人建議跳過</li>
+          <li>二馬路非步行街，人車混雜注意安全</li>
+          <li>海鮮大排檔先問總價，慎點時價菜</li>
+          <li>共享電驢勿騎出市區，否則斷電</li>
+          <li>6月採荔建議穿長袖防蚊+防滑鞋</li>
+          <li>週日下午返深，13:30前出發避堵</li>
+        </ul>
+      </div>
+      <div class="checklist-box">
+        <h4>攜帶清單</h4>
+        <ul>
+          <li>身份證（別墅入住一人一證）</li>
+          <li>駕照、行駛證（2台車）</li>
+          <li>防曬霜 SPF50+、遮陽帽、太陽眼鏡</li>
+          <li>泳衣、浮板、挖沙工具（小孩）</li>
+          <li>防滑拖鞋、換洗衣物（多備幾套）</li>
+          <li>暈車藥、腸胃藥、創可貼、驅蚊液</li>
+          <li>充電寶、車載充電器</li>
+          <li>泡沫箱+冰袋（帶荔枝返深）</li>
+          <li>現金（部分果園/小攤只收現金）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
