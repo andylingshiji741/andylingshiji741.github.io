@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>川西秘境五日自駕 · 成都出發高原環線攻略</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #FDF8F0;
+    color: #3D2B1F;
+    line-height: 1.7;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .hero {
+    position: relative;
+    min-height: 340px;
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    background: linear-gradient(160deg, #1a3a5c 0%, #2d5a87 25%, #5b8db8 50%, #c9a96e 80%, #e8d5b5 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px 32px 28px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 65%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.5));
+  }
+  .hero-deco { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
+  .hero-deco .peak1 {
+    position: absolute; bottom: 80px; left: 5%;
+    width: 0; height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 140px solid rgba(255,255,255,0.15);
+  }
+  .hero-deco .peak2 {
+    position: absolute; bottom: 80px; left: 25%;
+    width: 0; height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 110px solid rgba(255,255,255,0.1);
+  }
+  .hero-deco .peak3 {
+    position: absolute; bottom: 80px; right: 15%;
+    width: 0; height: 0;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 160px solid rgba(255,255,255,0.12);
+  }
+  .hero-deco .snow-cap {
+    position: absolute; bottom: 195px; left: 12%;
+    width: 50px; height: 20px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50% 50% 0 0;
+  }
+  .hero-content { position: relative; z-index: 1; color: #fff; }
+  .hero-content h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .hero-content .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.92;
+    margin-bottom: 20px;
+  }
+  .hero-stats { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-stat {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .hero-stat strong { display: block; font-size: 0.75rem; opacity: 0.85; }
+
+  .section {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.25rem;
+    color: #8B6914;
+    font-weight: 700;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #F5E6D0;
+  }
+
+  .route-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 20px;
+    font-size: 0.82rem;
+  }
+  .route-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #D4A84B;
+    border: 2px solid #FDF8F0;
+    flex-shrink: 0;
+  }
+  .route-connector { width: 24px; height: 2px; background: #E8D5B5; flex-shrink: 0; }
+  .route-label { color: #8B6914; font-weight: 600; padding: 0 3px; }
+  .segment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .segment-card {
+    background: #FFFAF3;
+    border-radius: 8px;
+    padding: 14px;
+    border-left: 3px solid #D4A84B;
+  }
+  .segment-card h4 { color: #8B6914; font-size: 0.95rem; margin-bottom: 6px; }
+  .segment-card p { font-size: 0.82rem; color: #666; }
+  .segment-card .duration {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    background: #F5E6D0;
+    color: #8B6914;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  .day-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .day-header {
+    background: linear-gradient(135deg, #F5E6D0, #F0DCC0);
+    border-left: 4px solid #D4A84B;
+    padding: 16px 24px;
+  }
+  .day-header h3 { color: #8B6914; font-size: 1.1rem; }
+  .day-body { display: flex; padding: 20px 24px; gap: 20px; }
+  .timeline { flex: 7; }
+  .highlights-sidebar {
+    flex: 3;
+    background: #FFFAF3;
+    border-left: 3px solid #D4A84B;
+    border-radius: 8px;
+    padding: 16px;
+    align-self: flex-start;
+  }
+  .highlights-sidebar h4 { color: #8B6914; font-size: 0.9rem; margin-bottom: 10px; }
+  .highlights-sidebar ul { list-style: none; }
+  .highlights-sidebar li {
+    font-size: 0.82rem;
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .highlights-sidebar li::before {
+    content: '';
+    position: absolute; left: 0; top: 11px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #D4A84B;
+  }
+  .tips-block { margin-top: 14px; }
+  .tips-block h4 { color: #C62828; font-size: 0.85rem; margin-bottom: 8px; }
+
+  .timeline-item { position: relative; padding-left: 28px; padding-bottom: 22px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: 0; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #D4A84B;
+    border: 2px solid #FDF8F0;
+    z-index: 1;
+  }
+  .timeline-item::after {
+    content: '';
+    position: absolute; left: 4px; top: 16px;
+    width: 2px;
+    height: calc(100% - 6px);
+    background: #E8D5B5;
+  }
+  .timeline-item:last-child::after { display: none; }
+  .time-label { font-size: 0.8rem; color: #8B6914; font-weight: 600; margin-bottom: 4px; }
+  .spot-name { font-size: 0.95rem; font-weight: 600; color: #3D2B1F; margin-bottom: 4px; }
+  .spot-desc { font-size: 0.82rem; color: #666; }
+  .tags { margin: 6px 0; }
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-right: 4px;
+  }
+  .tag-recommend { background: #E8F5E9; color: #2E7D32; }
+  .tag-free { background: #E3F2FD; color: #1565C0; }
+  .tag-booking { background: #FFF3E0; color: #E65100; }
+  .tag-photo { background: #FCE4EC; color: #C62828; }
+  .tag-altitude { background: #F3E5F5; color: #6A1B9A; }
+  .ticket-tag {
+    font-size: 0.75rem;
+    color: #8B6914;
+    background: #F5E6D0;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .col-card { background: #FFFAF3; border-radius: 8px; padding: 14px; }
+  .col-card h4 {
+    color: #8B6914;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #F5E6D0;
+  }
+  .col-card ul { list-style: none; }
+  .col-card li { font-size: 0.8rem; padding: 3px 0; color: #555; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th { background: #F5E6D0; color: #8B6914; padding: 10px 12px; text-align: left; font-weight: 600; }
+  td { padding: 9px 12px; border-bottom: 1px solid #F0E6D6; }
+  tr:last-child td { border-bottom: none; }
+
+  .budget-totals { margin-top: 16px; }
+  .budget-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .budget-economy { background: #E8F5E9; color: #2E7D32; }
+  .budget-comfort { background: #FFF3E0; color: #E65100; }
+  .budget-luxury { background: #FCE4EC; color: #C62828; }
+  .saving-tips {
+    background: #FFFAF3;
+    border-left: 3px solid #D4A84B;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .saving-tips h4 { color: #8B6914; font-size: 0.88rem; margin-bottom: 8px; }
+  .saving-tips li { font-size: 0.82rem; color: #555; margin-left: 16px; }
+  .disclaimer { font-size: 0.75rem; color: #999; margin-top: 12px; text-align: center; }
+
+  .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .checklist-box { background: #FFFAF3; border-radius: 8px; padding: 16px; }
+  .checklist-box h4 { color: #8B6914; font-size: 0.9rem; margin-bottom: 10px; }
+  .checklist-box li { font-size: 0.82rem; color: #555; margin-left: 16px; margin-bottom: 4px; }
+  .source-note { font-size: 0.75rem; color: #999; margin-top: 8px; font-style: italic; }
+
+  @media (max-width: 600px) {
+    .day-body { flex-direction: column; }
+    .highlights-sidebar { border-left: none; border-top: 3px solid #D4A84B; }
+    .three-col { grid-template-columns: 1fr; }
+    .segment-grid { grid-template-columns: 1fr; }
+    .checklist-grid { grid-template-columns: 1fr; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; }
+    .hero-content h1 { font-size: 1.4rem; }
+  }
+  @media print {
+    body { background: white; }
+    .day-card { break-inside: avoid; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-deco">
+    <div class="peak1"></div>
+    <div class="peak2"></div>
+    <div class="peak3"></div>
+    <div class="snow-cap"></div>
+  </div>
+  <div class="hero-content">
+    <h1>川西秘境五日自駕 · 雪山草原環線</h1>
+    <p class="subtitle">成都出發，穿越新都橋、貢嘎雪山、藏區草原、墨石公園與四姑娘山——中國西部最壯麗的高原風光之一</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>行程天數</strong>5天4晚 · 自駕環線</div>
+      <div class="hero-stat"><strong>總里程</strong>約 1,200 km</div>
+      <div class="hero-stat"><strong>最高海拔</strong>折多山 4,298 m</div>
+      <div class="hero-stat"><strong>最佳季節</strong>5–10月（9–10月秋色巔峰）</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <h2 class="section-title">路線總覽</h2>
+    <div class="route-line">
+      <span class="route-label">成都</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">新都橋</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">貢嘎秘境</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">塔公草原</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">墨石公園</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">四姑娘山</span>
+      <span class="route-connector"></span>
+      <span class="route-dot"></span>
+      <span class="route-label">成都</span>
+    </div>
+    <div class="segment-grid">
+      <div class="segment-card">
+        <h4>Day 1 · 進入高原</h4>
+        <p>翻越折多山，抵達「攝影師天堂」新都橋，適應海拔</p>
+        <span class="duration">成都 → 新都橋 · 403 km</span>
+      </div>
+      <div class="segment-card">
+        <h4>Day 2 · 隱藏山谷 & 貢嘎</h4>
+        <p>甲根壩田園秘境，近距離仰望蜀山之王貢嘎雪山</p>
+        <span class="duration">冷嘎措 / 子梅埡口</span>
+      </div>
+      <div class="segment-card">
+        <h4>Day 3 · 草原 & 藏寨</h4>
+        <p>塔公草原遠眺雅拉雪山，丹巴中路藏寨體驗嘉絨文化</p>
+        <span class="duration">塔公 → 丹巴 · 230 km</span>
+      </div>
+      <div class="segment-card">
+        <h4>Day 4–5 · 異星地貌 & 雪山</h4>
+        <p>墨石公園黑色石林，四姑娘山雙橋溝後返成都</p>
+        <span class="duration">丹巴 → 四姑娘山 → 成都</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 1 · 主題：穿越折多山，進入攝影天堂</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">07:30 – 08:00</div>
+          <div class="spot-name">成都出發<span class="ticket-tag">建議早發 · 避開折多山午後大霧</span></div>
+          <div class="tags">
+            <span class="tag tag-booking">SUV 強烈建議</span>
+            <span class="tag tag-altitude">起點海拔 500 m</span>
+          </div>
+          <p class="spot-desc">從成都出發，走<strong>成雅高速 → 雅康高速</strong>至瀘定（約 3.5h）。全程高速路況良好，途中可在雅安服務區休息補給。建議出發前在康定/新都橋方向加滿油箱。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">11:00 – 12:30</div>
+          <div class="spot-name">瀘定橋<span class="ticket-tag">門票 ¥10</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">推薦</span>
+            <span class="tag tag-free">遊覽約 1h</span>
+          </div>
+          <p class="spot-desc">飛奪瀘定橋的歷史地標，鐵索橋橫跨大渡河，紅色旅遊經典。橋上晃動較大，注意腳下安全。可在瀘定縣城午餐，品嚐雅魚、磨西老臘肉等地方菜。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">13:30 – 15:00</div>
+          <div class="spot-name">康定情歌城<span class="ticket-tag">海拔 2,560 m</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">途經休整</span>
+          </div>
+          <p class="spot-desc">途經康定市區，可在情歌廣場、跑馬山腳短暫停留拍照。這裡是進入高原前的最後補給點——超市、藥店、氧氣瓶齊全。建議在此購買 2–3 瓶便攜氧氣（約 ¥20/瓶）。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">15:00 – 17:30</div>
+          <div class="spot-name">翻越折多山<span class="ticket-tag">埡口 4,298 m</span></div>
+          <div class="tags">
+            <span class="tag tag-altitude">康巴第一關</span>
+            <span class="tag tag-photo">拍照圣地</span>
+            <span class="tag tag-booking">限速 60 km/h</span>
+          </div>
+          <p class="spot-desc">川藏線上的第一道險關，山頂有大型觀景台和經幡瑪尼堆，可遠眺貢嘎群峰。此段彎道密集、坡度大，冬季/雨雪天易結冰起霧，需減速慢行。翻過折多山即正式進入青藏高原。</p>
+          <p class="source-note">資訊來源：西行川藏路況指南、汽車之家川藏線路況總覽</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">17:30 – 19:00</div>
+          <div class="spot-name">新都橋十里長廊<span class="ticket-tag">海拔 3,460 m · 免費</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">攝影天堂</span>
+            <span class="tag tag-free">免費</span>
+          </div>
+          <p class="spot-desc">被譽為「光與影的世界」，沿途白楊林、藏式民居、青稞田與溪流交錯。傍晚斜射光線最出片，是今日重頭戲。入住新都橋鎮，選擇<strong>供氧酒店</strong>（彌散式供氧更佳）。</p>
+          <p class="spot-desc" style="margin-top:8px"><strong>住宿推薦：</strong>新都橋攝影主題民宿（¥200–400/晚）或瑞景大酒店等供氧酒店（¥350–600/晚）。第一晚忌洗澡、忌劇烈運動，多喝水早睡。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>雅康高速飛馳，3.5h 抵瀘定</li>
+          <li>瀘定橋飛奪大渡河</li>
+          <li>翻越折多山埡口 4,298 m</li>
+          <li>新都橋十里長廊夕陽光影</li>
+          <li>正式進入藏區高原</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>務必 07:30 前出發，下午翻山更安全</li>
+            <li>折多山彎道多，勿超車</li>
+            <li>第一晚忌洗澡、忌飲酒</li>
+            <li>備氧氣瓶，康定購買最方便</li>
+            <li>晝夜溫差 15°C+，帶厚外套</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 2 · 主題：隱藏山谷 & 蜀山之王貢嘎雪山</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">07:30 – 09:30</div>
+          <div class="spot-name">甲根壩鄉 · 日車村 / 松頓尼吉<span class="ticket-tag">車程約 1.5h · 免費</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">隱藏秘境</span>
+            <span class="tag tag-free">免費</span>
+            <span class="tag tag-recommend">強烈推薦</span>
+          </div>
+          <p class="spot-desc">川西最被低估的田園秘境。5–6 月俄色花（貢嘎海棠）盛開，雪白花海與雪山同框，宛如宮崎駿動畫場景。藏式木屋、青稞架、牛羊漫步花間，是遠離遊客區的純淨淨土。轎車可達，全程柏油路。</p>
+          <p class="source-note">資訊來源：Trip.com 甲根壩攻略、旅薦網新都橋攝影指南</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">10:00 – 12:00</div>
+          <div class="spot-name">居里寺 / 黑石城（可選）<span class="ticket-tag">小眾機位</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">貢嘎群峰</span>
+            <span class="tag tag-free">免費</span>
+          </div>
+          <p class="spot-desc">居里寺後山可俯瞰河谷；黑石城以黑色瑪尼石為前景拍攝貢嘎群峰，是小眾高端機位。若時間緊可跳過，直奔貢嘎核心觀景點。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">12:30 – 13:30</div>
+          <div class="spot-name">午餐 · 甲根壩或沙德鄉</div>
+          <p class="spot-desc">藏式土火鍋、酥油茶、青稞餅。高原地區餐飲選擇有限，建議自備一些乾糧和零食。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">14:00 – 18:30</div>
+          <div class="spot-name">冷嘎措 · 貢嘎之眼<span class="ticket-tag">湖面海拔 4,530 m</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">日照金山</span>
+            <span class="tag tag-altitude">高海拔徒步</span>
+            <span class="tag tag-recommend">核心景點</span>
+          </div>
+          <p class="spot-desc">貢嘎雪山最經典的倒影機位，被譽為「貢嘎之眼」。車輛只能到玉龍西村/幫木吉德村停車場，之後需<strong>徒步 3–4 小時</strong>或騎馬上山（單程約 ¥160–210/人，含馬夫）。湖面倒映貢嘎主峰，日落時分的日照金山極其震撼。</p>
+          <p class="spot-desc" style="margin-top:8px"><strong>輕量替代方案：</strong>體力不足或時間不夠，可改去<strong>子梅埡口</strong>（海拔 4,550 m，開車可達，免費），直線距離貢嘎僅 5 km，是最近的觀景平台。包車往返約 ¥300–400/車。傍晚看日照金山後返回，切勿摸黑下山。</p>
+          <p class="source-note">資訊來源：攜程遊記@貢嘎雪山實測、汽車之家貢嘎西坡攻略</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">19:30</div>
+          <div class="spot-name">入住新都橋或上木居村<span class="ticket-tag">海拔 3,460 / 3,750 m</span></div>
+          <div class="tags">
+            <span class="tag tag-booking">供氧酒店</span>
+          </div>
+          <p class="spot-desc">若去冷嘎措看日落，建議住上木居村（距景點近，但海拔更高）。若走子梅埡口輕量線，可回新都橋住宿。第二晚仍忌劇烈運動。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>甲根壩俄色花海（5–6月限定）</li>
+          <li>冷嘎措貢嘎雪山倒影</li>
+          <li>子梅埡口近距離仰望貢嘎</li>
+          <li>日照金山攝影大片</li>
+          <li>藏區田園原始風光</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>冷嘎措徒步需 3–4h，備足氧氣</li>
+            <li>騎馬比徒步省力，建議預約</li>
+            <li>子梅埡口碎石路，SUV 更穩</li>
+            <li>日落後立即下山，禁摸黑返程</li>
+            <li>山頂風大溫度低，帶羽絨/衝鋒衣</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 3 · 主題：藏區草原 & 嘉絨藏寨</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">08:00 – 09:00</div>
+          <div class="spot-name">新都橋 → 塔公草原<span class="ticket-tag">40 km · 約 1h</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">草原雪山</span>
+          </div>
+          <p class="spot-desc">沿 G318 北行，沿途欣賞高原草甸風光。清晨光線柔和，適合公路大片拍攝。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">09:00 – 11:30</div>
+          <div class="spot-name">塔公草原 & 塔公寺 & 木雅金塔<span class="ticket-tag">草原免費 · 金塔 ¥20</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">必訪</span>
+            <span class="tag tag-photo">雅拉雪山同框</span>
+          </div>
+          <p class="spot-desc">海拔 3,730 m 的高原草原，木雅金塔、塔公寺紅牆與雅拉雪山三景同框，是川西最經典的畫面之一。塔公寺有「小大昭寺」之稱，內部禁止拍照，可順時針轉經。山坡觀景台（¥15）可俯瞰整片草原。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">11:30 – 12:30</div>
+          <div class="spot-name">惠遠寺<span class="ticket-tag">免費</span></div>
+          <div class="tags">
+            <span class="tag tag-free">免費</span>
+            <span class="tag tag-recommend">推薦</span>
+          </div>
+          <p class="spot-desc">距塔公約 10 km，被稱為「小大昭寺」，在藏傳佛教中地位崇高。寺院面積很大，車可開入參觀。金頂在陽光下熠熠生輝，是了解藏文化的絕佳窗口。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">13:00 – 15:00</div>
+          <div class="spot-name">八美草原 · 雅拉雪山觀景<span class="ticket-tag">途經</span></div>
+          <div class="tags">
+            <span class="tag tag-photo">雪山草原</span>
+          </div>
+          <p class="spot-desc">從塔公經八美鎮前往丹巴，沿途翻越疙瘩梁子，可遠眺雅拉雪山。八美草原遼闊壯美，牧民驅趕牛羊的畫面極具藏區風情。可在八美鎮午餐休息。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">15:30 – 18:00</div>
+          <div class="spot-name">丹巴中路藏寨<span class="ticket-tag">海拔 2,100 m · 門票 ¥30</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">強烈推薦</span>
+            <span class="tag tag-photo">藏寨攝影</span>
+          </div>
+          <p class="spot-desc">「千碉之國」丹巴最原始的藏寨之一，百年石木碉樓錯落依山而建，比甲居藏寨更寧靜人少。傍晚炊煙裊裊、夕陽灑在白牆藏房上，是人文攝影的絕佳時機。海拔僅 2,100 m，是調整身體、緩解高反的好選擇。</p>
+          <p class="spot-desc" style="margin-top:8px"><strong>住宿推薦：</strong>中路藏寨民宿（¥200–350/晚），體驗嘉絨藏族風情。藏裝體驗約 ¥30/套，可拍民族風寫真。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>塔公草原木雅金塔 + 雅拉雪山</li>
+          <li>塔公寺轉經體驗藏文化</li>
+          <li>惠遠寺金頂輝煌</li>
+          <li>八美草原牧歌風光</li>
+          <li>中路藏寨碉樓夕陽</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>塔公草原午後易突變天氣，備雨具</li>
+            <li>寺廟內勿拍照、勿逆時針轉經</li>
+            <li>丹巴海拔低，今晚可洗澡了</li>
+            <li>藏寨路窄，會車注意安全</li>
+            <li>今日行車約 230 km，5–6h</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 4 · 主題：異星地貌墨石公園 → 四姑娘山</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">08:00 – 09:30</div>
+          <div class="spot-name">丹巴 → 墨石公園<span class="ticket-tag">約 90 km · 2h</span></div>
+          <p class="spot-desc">經八美鎮前往墨石公園景區（塔公方向 15 km 處）。沿途牦牛谷風光秀麗，可停車拍照。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">09:30 – 12:00</div>
+          <div class="spot-name">墨石公園（甲居墨石）<span class="ticket-tag">門票 ¥60–80 + 觀光車 ¥30</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">必訪</span>
+            <span class="tag tag-photo">異星大片</span>
+            <span class="tag tag-booking">建議觀光車</span>
+          </div>
+          <p class="spot-desc">高原石林地貌，灰黑色岩石如同外星球表面，被稱為「異域星球」。景區內有木橋棧道，穿亮色長裙極易出片。建議乘觀光車進入，步行遊覽核心區域約 2h。旺季（4–11月）門票 ¥80，淡季 ¥60。</p>
+          <p class="source-note">資訊來源：去哪兒門票預訂、旅遊年卡攻略網 2025 票價</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">12:30 – 17:30</div>
+          <div class="spot-name">墨石公園 → 四姑娘山鎮<span class="ticket-tag">約 180 km · 4h</span></div>
+          <div class="tags">
+            <span class="tag tag-altitude">途經巴朗山</span>
+          </div>
+          <p class="spot-desc">午後出發，經小金縣前往四姑娘山鎮（日隆鎮）。途中翻越巴朗山埡口（海拔 4,483 m），可經隧道通行。建議在<strong>貓鼻梁觀景台</strong>（免費）停車，遠眺四姑娘山四座雪峰全景——這是四姑娘山最佳遠觀機位。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">18:00</div>
+          <div class="spot-name">入住四姑娘山鎮<span class="ticket-tag">海拔 3,200 m</span></div>
+          <div class="tags">
+            <span class="tag tag-booking">提前訂房</span>
+          </div>
+          <p class="spot-desc">日隆鎮是四姑娘山景區門戶，餐飲住宿配套完善。推薦空山客棧（攝影主題，¥300–500/晚）或陽光熠居酒店（¥250–400/晚）。今晚早睡，明天一早進溝。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>墨石公園異星地貌大片</li>
+          <li>牦牛谷高原河谷風光</li>
+          <li>貓鼻梁遠眺四姑娘山全景</li>
+          <li>翻越巴朗山埡口</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>墨石公園建議上午光線最佳</li>
+            <li>今日行車最長，備好零食和水</li>
+            <li>巴朗山隧道注意減速</li>
+            <li>四姑娘山旺季房源緊張，提前訂</li>
+            <li>門票建議「阿壩旅遊網」提前預約</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>Day 5 · 主題：四姑娘山雙橋溝 → 返程成都</h3>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">07:30 – 08:00</div>
+          <div class="spot-name">四姑娘山鎮 → 雙橋溝景區<span class="ticket-tag">車程 10 min</span></div>
+          <div class="tags">
+            <span class="tag tag-booking">建議提前網購票</span>
+          </div>
+          <p class="spot-desc">雙橋溝是四姑娘山三條溝中最適合大眾遊客的，全程觀光車 + 棧道，體力消耗小。旺季 15:00 後停止入園，務必早到。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">08:00 – 12:30</div>
+          <div class="spot-name">雙橋溝<span class="ticket-tag">門票 ¥80 + 觀光車 ¥70 = ¥150</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">必訪</span>
+            <span class="tag tag-photo">雪山森林</span>
+          </div>
+          <p class="spot-desc">東方阿爾卑斯風光，觀光車直達最深處<strong>红杉林</strong>（海拔 3,840 m），沿途經過布达拉峰、四姑娜措、攆魚壩等經典景點。雪山倒映湖面、原始森林棧道，是四姑娘山的精華所在。建議遊覽 4–5 小時。</p>
+          <p class="source-note">資訊來源：Trip.com 四姑娘山門票 2025、當旅網川西小環線攻略</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">13:00 – 14:00</div>
+          <div class="spot-name">午餐 · 四姑娘山鎮</div>
+          <p class="spot-desc">牦牛肉湯鍋、松茸燉雞、青稞餅。出溝後在鎮上用餐，補充體力準備返程。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">14:00 – 19:00</div>
+          <div class="spot-name">四姑娘山 → 成都<span class="ticket-tag">約 220 km · 4–5h</span></div>
+          <div class="tags">
+            <span class="tag tag-recommend">都汶高速</span>
+          </div>
+          <p class="spot-desc">經巴朗山隧道 → 臥龍 → 映秀 → 都江堰 → 成都。都汶高速全程，路況良好。途中可在映秀地震遺址或都江堰短暫停留（可選）。預計傍晚 19:00 前抵達成都。</p>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <h4>今日亮點</h4>
+        <ul>
+          <li>雙橋溝红杉林雪山倒影</li>
+          <li>布达拉峰公路大片</li>
+          <li>四姑娜措高山湖泊</li>
+          <li>都汶高速順暢返蓉</li>
+        </ul>
+        <div class="tips-block">
+          <h4>重要提醒</h4>
+          <ul>
+            <li>雙橋溝 15:00 後禁止入園</li>
+            <li>觀光車末班約 17:00，注意時間</li>
+            <li>長坪溝需徒步 6h+，今日不建議</li>
+            <li>返程避開週日傍晚高峰</li>
+            <li>還車前檢查油量/電量</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 预约与行前准备 -->
+  <div class="section">
+    <h2 class="section-title">預約與行前準備</h2>
+    <div class="three-col">
+      <div class="col-card">
+        <h4>預約購票</h4>
+        <table>
+          <tr><th>景點</th><th>預約</th><th>參考價</th></tr>
+          <tr><td>瀘定橋</td><td>現場購</td><td>¥10</td></tr>
+          <tr><td>冷嘎措</td><td>無需</td><td>清潔費 ¥20</td></tr>
+          <tr><td>子梅埡口</td><td>無需</td><td>免費</td></tr>
+          <tr><td>塔公草原</td><td>無需</td><td>免費</td></tr>
+          <tr><td>木雅金塔</td><td>現場購</td><td>¥20</td></tr>
+          <tr><td>中路藏寨</td><td>現場購</td><td>¥30</td></tr>
+          <tr><td>墨石公園</td><td>建議網購</td><td>¥80+¥30 車</td></tr>
+          <tr><td>四姑娘山雙橋溝</td><td>提前網購</td><td>¥150</td></tr>
+        </table>
+      </div>
+      <div class="col-card">
+        <h4>交通前往</h4>
+        <ul>
+          <li><strong>成都租車</strong>：SUV ¥300–500/天，強烈建議</li>
+          <li><strong>全程油費</strong>：約 ¥800–1,000（1,200 km）</li>
+          <li><strong>過路費</strong>：約 ¥300–400（雅康高速等）</li>
+          <li><strong>加油點</strong>：康定、新都橋、丹巴、小金</li>
+          <li><strong>路況查詢</strong>：微信「甘孜交警」「四川交通廣播」</li>
+          <li><strong>冷嘎措騎馬</strong>：單程 ¥160–210/人</li>
+          <li><strong>子梅埡口包車</strong>：往返 ¥300–400/車</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>預約提醒</h4>
+        <ul>
+          <li>四姑娘山旺季限流，提前 3 天網購</li>
+          <li>購票渠道：「阿壩旅遊網」小程序</li>
+          <li>5–10 月旺季，住宿提前 7–15 天訂</li>
+          <li>新都橋/四姑娘山優先選供氧酒店</li>
+          <li>折多山冬季可能封路，出發前查路況</li>
+          <li>防火期部分秘境可能關閉（11–4月）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 实用建议 -->
+  <div class="section">
+    <h2 class="section-title">實用建議</h2>
+    <div class="three-col">
+      <div class="col-card">
+        <h4>住宿推薦</h4>
+        <ul>
+          <li><strong>D1–D2 新都橋</strong>：攝影民宿 ¥200–400/晚</li>
+          <li><strong>D2 上木居</strong>（可選）：近冷嘎措 ¥150–300</li>
+          <li><strong>D3 丹巴中路</strong>：藏寨民宿 ¥200–350</li>
+          <li><strong>D4 四姑娘山</strong>：日隆鎮 ¥250–500</li>
+          <li>高海拔區選<strong>彌散式供氧</strong>酒店</li>
+          <li>避免住海拔 4,000 m+ 帳篷營地</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>美食推薦</h4>
+        <ul>
+          <li><strong>牦牛肉火鍋</strong>：康定/新都橋必吃</li>
+          <li><strong>酥油茶 & 青稞餅</strong>：藏區特色早餐</li>
+          <li><strong>康定摻摻麵</strong>：情歌城名小吃</li>
+          <li><strong>松茸燉雞</strong>：7–9 月時令限定</li>
+          <li><strong>丹巴香豬</strong>：藏寨特色肉類</li>
+          <li><strong>糌粑 & 酸奶</strong>：體驗藏餐文化</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>高原自駕貼士</h4>
+        <ul>
+          <li>出發前一周可服紅景天預防高反</li>
+          <li>便攜氧氣瓶 ¥20/瓶，備 4–6 瓶</li>
+          <li>SPF50+ 防曬霜，高原紫外線極強</li>
+          <li>晝夜溫差 15–20°C，洋蔥式穿衣</li>
+          <li>11–3 月備防滑鏈（折多山/巴朗山）</li>
+          <li>下載離線地圖（高德/百度）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 预算预估 -->
+  <div class="section">
+    <h2 class="section-title">預算預估（2人 / 5天4晚）</h2>
+    <table>
+      <tr><th>項目</th><th>單價參考</th><th>小計（2人）</th><th>備註</th></tr>
+      <tr><td>租車（SUV）</td><td>¥400/天</td><td>¥2,000</td><td>5天，含基本保險</td></tr>
+      <tr><td>油費 + 過路費</td><td>—</td><td>¥1,200</td><td>約 1,200 km</td></tr>
+      <tr><td>住宿</td><td>¥300/晚</td><td>¥1,200</td><td>4晚舒適型</td></tr>
+      <tr><td>景點門票</td><td>見明細</td><td>¥700</td><td>含雙橋溝+墨石等</td></tr>
+      <tr><td>騎馬/包車</td><td>可選</td><td>¥400</td><td>冷嘎措或子梅埡口</td></tr>
+      <tr><td>餐飲</td><td>¥150/人/天</td><td>¥1,500</td><td>5天</td></tr>
+      <tr><td>氧氣/藥品</td><td>—</td><td>¥200</td><td>高反預防</td></tr>
+      <tr><td>其他</td><td>預留</td><td>¥500</td><td>購物+應急</td></tr>
+    </table>
+    <div class="budget-totals">
+      <div class="budget-row budget-economy">
+        <span>合計（經濟型）</span>
+        <span>≈ ¥5,500 – ¥6,500 / 2人</span>
+      </div>
+      <div class="budget-row budget-comfort">
+        <span>合計（舒適型）</span>
+        <span>≈ ¥7,500 – ¥9,000 / 2人</span>
+      </div>
+      <div class="budget-row budget-luxury">
+        <span>合計（豪華型）</span>
+        <span>≈ ¥12,000 – ¥15,000 / 2人</span>
+      </div>
+    </div>
+    <div class="saving-tips">
+      <h4>省錢小貼士</h4>
+      <ul>
+        <li>錯開國慶/五一，住宿價格可省 30–50%</li>
+        <li>子梅埡口免費且開車可達，可替代冷嘎措騎馬</li>
+        <li>中路藏寨比甲居藏寨人少且便宜</li>
+        <li>自備乾糧和零食，高原餐飲偏貴</li>
+        <li>攜程/飛豬租車提前 2 周訂更優惠</li>
+      </ul>
+    </div>
+    <p class="disclaimer">以上價格為 2026 年 6 月參考價，實際以出行時為準</p>
+  </div>
+
+  <!-- 出发前最后检查 -->
+  <div class="section">
+    <h2 class="section-title">出發前最後檢查</h2>
+    <div class="checklist-grid">
+      <div class="checklist-box">
+        <h4>注意事項</h4>
+        <ul>
+          <li>首日翻折多山，高反高發，動作放緩</li>
+          <li>前兩晚忌洗澡、忌飲酒、忌劇烈運動</li>
+          <li>冷嘎措禁止摸黑下山，安全第一</li>
+          <li>7–8 月雨季注意落石和塌方</li>
+          <li>11–3 月部分路段積雪，需防滑鏈</li>
+          <li>尊重藏區宗教習俗，寺廟內勿拍照</li>
+          <li>草原不留垃圾，環保第一</li>
+          <li>出發前查「甘孜交警」最新路況</li>
+        </ul>
+      </div>
+      <div class="checklist-box">
+        <h4>攜帶清單</h4>
+        <ul>
+          <li>身份證、駕照、行駛證</li>
+          <li>羽絨服 + 衝鋒衣（晝夜溫差大）</li>
+          <li>防曬霜 SPF50+、墨鏡、遮陽帽</li>
+          <li>便攜氧氣瓶 4–6 瓶、紅景天</li>
+          <li>布洛芬（高反頭痛）、感冒藥、腸胃藥</li>
+          <li>保溫杯、潤唇膏、保濕霜</li>
+          <li>充電寶、車載充電器</li>
+          <li>現金（部分藏區只收現金）</li>
+          <li>防滑鏈（秋冬必備）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
